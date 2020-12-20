@@ -4,82 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use App\Http\Resources\Video\VideoResource;
+use App\Http\Resources\Video\VideoCollection;
+use App\Http\Requests\Video\VideoStoreRequest;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Video\VideoUpdateRequest;
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return VideoCollection::collection(Video::paginate(10));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(VideoStoreRequest $request)
     {
-        //
+        $video = new Video;
+        $video->title = $request->title;
+        $video->photo = $request->file('photo')->store('public');
+        $video->video = $request->file('video')->store('public');
+        $video->save();
+
+        return response()->json([
+            'data' => new VideoResource($video)
+        ], Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
     public function show(Video $video)
     {
-        //
+        return new VideoResource($video);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Video $video)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Video $video)
+    public function update(VideoUpdateRequest $request, Video $video)
     {
-        //
+        if($request->has('title'))
+            $video->title = $request->title;
+        if($request->has('photo')) {
+            unlink(storage_path("app/$video->photo"));
+            $video->photo = $request->file('photo')->store('public');
+        }
+        if($request->has('video')) {
+            unlink(storage_path("app/$video->video"));
+            $video->video = $request->file('video')->store('public');
+        }
+        $video->save();
+
+        return response()->json([
+            'data' => new VideoResource($video)
+        ], Response::HTTP_ACCEPTED);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Video $video)
     {
-        //
+        // unlink(storage_path("app/$video->photo"));
+        // unlink(storage_path("app/$video->video"));
+        $video->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

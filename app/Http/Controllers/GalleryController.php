@@ -4,82 +4,68 @@ namespace App\Http\Controllers;
 
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\Gallery\GalleryResource;
+use App\Http\Resources\Gallery\GalleryCollection;
+use App\Http\Requests\Gallery\GalleryStoreRequest;
+use App\Http\Requests\Gallery\GalleryUpdateRequest;
 
 class GalleryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return GalleryCollection::collection(Gallery::paginate(10));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(GalleryStoreRequest $request)
     {
-        //
+        $gallery = new Gallery;
+        $gallery->category_id = $request->category_id;
+        $gallery->description = $request->description;
+        $gallery->photo = $request->file('photo')->store('public');
+        $gallery->save();
+
+        return response()->json([
+            'data' => new GalleryResource($gallery)
+        ], Response::HTTP_CREATED);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function show(Gallery $gallery)
     {
-        //
+        return new GalleryResource($gallery);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Gallery $gallery)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Gallery $gallery)
+    public function update(GalleryUpdateRequest $request, Gallery $gallery)
     {
-        //
+        if($request->has('category_id'))
+            $gallery->category_id = $request->category_id;
+        if($request->has('description'))
+            $gallery->description = $request->description;
+        if($request->has('photo')) {
+            unlink(storage_path("app/$gallery->photo"));
+            $gallery->photo = $request->file('photo')->store('public');
+        }
+        $gallery->save();
+
+        return response()->json([
+            'data' => new GalleryResource($gallery)
+        ], Response::HTTP_ACCEPTED);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Gallery $gallery)
     {
-        //
+        // unlink(storage_path("app/$gallery->photo"));
+        $gallery->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

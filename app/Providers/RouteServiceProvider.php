@@ -37,6 +37,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapContactUSRoutes();
         $this->mapGalleryCategoryRoutes();
         $this->mapGalleryRoutes();
+        $this->mapVideoRoutes();
         $this->mapWebRoutes();
     }
 
@@ -189,5 +190,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/gallery/gallery.php'));
+    }
+
+    protected function mapVideoRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api/video/video.php'));
     }
 }
