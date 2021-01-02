@@ -26,8 +26,11 @@ class CoachController extends Controller
     {
         $coach = new Coach;
         $coach->name = $request->name;
-        $coach->bio = $request->bio;
+        $coach->email = $request->email;
+        $coach->password = $request->password;
+        // $coach->bio = $request->bio;
         $coach->club = $request->club;
+        $coach->rating = $request->rating;
         $coach->avatar = $request->file('avatar')->store('public');
         $coach->save();
 
@@ -50,10 +53,16 @@ class CoachController extends Controller
     {
         if($request->has('name'))
             $coach->name = $request->name;
-        if($request->has('bio'))
-            $coach->bio = $request->bio;
+        if($request->has('email'))
+            $coach->email = $request->email;
+        if($request->has('password'))
+            $coach->password = $request->password;
+        // if($request->has('bio'))
+        //     $coach->bio = $request->bio;
         if($request->has('club'))
             $coach->club = $request->club;
+        if($request->has('rating'))
+            $coach->club = $request->rating;
         if($request->has('avatar')) {
             unlink(storage_path("app/$coach->avatar"));
             $coach->avatar = $request->file('avatar')->store('public');

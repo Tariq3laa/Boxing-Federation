@@ -16,7 +16,7 @@ class CreateChampionshipsTable extends Migration
             $table->string('date');
             $table->string('title');
             $table->string('photo');
-            $table->string('status');
+            // $table->string('status');
             $table->string('age');
             $table->string('location');
             $table->string('other_details')->nullable();

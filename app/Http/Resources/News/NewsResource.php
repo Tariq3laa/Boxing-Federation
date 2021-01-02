@@ -13,7 +13,7 @@ class NewsResource extends JsonResource
     {
         return [
             'writer' => new WriterResource($this->writer),
-            'sponsors' => SponsorCollection::collection($this->sponsors),
+            // 'sponsors' => SponsorCollection::collection($this->sponsors),
             'date' => $this->date,
             'title' => $this->title,
             'description' => $this->description,

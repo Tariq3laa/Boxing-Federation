@@ -13,6 +13,7 @@ class CreateRefereesTable extends Migration
             $table->string('name');
             $table->string('club');
             $table->string('avatar');
+            $table->tinyInteger('rating');
             $table->softDeletes();
             $table->timestamps();
         });

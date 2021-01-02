@@ -11,8 +11,11 @@ class CoachResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'bio' => $this->bio,
+            'email' => $this->email,
+            'password' => $this->password,
+            // 'bio' => $this->bio,
             'club' => $this->club,
+            'rating' => $this->rating,
             'avatar' => URL::to('/') . (str_replace('public', '/storage', $this->avatar)),
         ];
     }

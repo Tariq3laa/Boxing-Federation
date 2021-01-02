@@ -17,6 +17,7 @@ class RefereeUpdateRequest extends FormRequest
             'name'                  => 'bail|nullable|string|max:1000',
             'club'                  => 'bail|nullable|string|max:1000',
             'avatar'                => 'bail|nullable|image',
+            'rating'                => 'bail|nullable|numeric|min:0',
         ];
     }
 }

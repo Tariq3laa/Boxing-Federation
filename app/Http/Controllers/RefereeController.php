@@ -27,6 +27,7 @@ class RefereeController extends Controller
         $referee = new Referee;
         $referee->name = $request->name;
         $referee->club = $request->club;
+        $referee->rating = $request->rating;
         $referee->avatar = $request->file('avatar')->store('public');
         $referee->save();
 
@@ -52,6 +53,8 @@ class RefereeController extends Controller
             $referee->name = $request->name;
         if($request->has('club'))
             $referee->club = $request->club;
+        if($request->has('rating'))
+            $referee->club = $request->rating;
         if($request->has('avatar')) {
             unlink(storage_path("app/$referee->avatar"));
             $referee->avatar = $request->file('avatar')->store('public');

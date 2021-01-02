@@ -13,6 +13,7 @@ class CreatePlayersTable extends Migration
             $table->string('name');
             $table->string('club');
             $table->string('avatar');
+            $table->dateTime('birth');
             $table->softDeletes();
             $table->timestamps();
         });

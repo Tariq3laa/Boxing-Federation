@@ -27,6 +27,7 @@ class PlayerController extends Controller
         $player = new Player;
         $player->name = $request->name;
         $player->club = $request->club;
+        $player->birth = $request->birth;
         $player->avatar = $request->file('avatar')->store('public');
         $player->save();
 
@@ -51,6 +52,8 @@ class PlayerController extends Controller
             $player->name = $request->name;
         if($request->has('club'))
             $player->club = $request->club;
+        if($request->has('birth'))
+            $player->club = $request->birth;
         if($request->has('avatar')) {
             unlink(storage_path("app/$player->avatar"));
             $player->avatar = $request->file('avatar')->store('public');

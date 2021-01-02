@@ -20,7 +20,7 @@ class ChampionshipResource extends JsonResource
             'gallery' => ChampionshipGalleryCollection::collection($this->gallery),
             'date' => $this->date,
             'title' => $this->title,
-            'status' => $this->status,
+            // 'status' => $this->status,
             'age' => $this->age,
             'location' => $this->location,
             'other_details' => $this->other_details,

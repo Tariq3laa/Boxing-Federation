@@ -32,7 +32,7 @@ class ChampionshipController extends Controller
         $championship->third_place = $request->third_place;
         $championship->date = $request->date;
         $championship->title = $request->title;
-        $championship->status = $request->status;
+        // $championship->status = $request->status;
         $championship->age = $request->age;
         $championship->location = $request->location;
         $championship->other_details = $request->other_details;
@@ -80,8 +80,8 @@ class ChampionshipController extends Controller
             $championship->date = $request->date;
         if($request->has('title'))
             $championship->title = $request->title;
-        if($request->has('status'))
-            $championship->status = $request->status;
+        // if($request->has('status'))
+        //     $championship->status = $request->status;
         if($request->has('age'))
         $championship->age = $request->age;
         if($request->has('location'))

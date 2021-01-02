@@ -18,6 +18,7 @@ class CoachUpdateRequest extends FormRequest
             'bio'                   => 'bail|nullable|string|max:1000',
             'club'                  => 'bail|nullable|string|max:1000',
             'avatar'                => 'bail|nullable|image',
+            'rating'                => 'bail|nullable|numeric|min:0',
         ];
     }
 }

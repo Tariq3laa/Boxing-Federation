@@ -11,9 +11,12 @@ class CreateCoachesTable extends Migration
         Schema::create('coaches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('bio');
+            $table->string('email')->unique();
+            $table->string('password');
+            // $table->string('bio');
             $table->string('club');
             $table->string('avatar');
+            $table->tinyInteger('rating');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -33,13 +33,12 @@ class NewsController extends Controller
         $news->photo = $request->file('photo')->store('public');
         $news->save();
 
-        for ($i=0; $i < count($request->sponsor_id) ; $i++) {
-            $newsSponsors = new NewsSponsor;
-            $newsSponsors->news_id = $news->id;
-            $newsSponsors->sponsor_id = $request->sponsor_id[$i];
-            $newsSponsors->save();
-        }
-
+        // for ($i=0; $i < count($request->sponsor_id) ; $i++) {
+        //     $newsSponsors = new NewsSponsor;
+        //     $newsSponsors->news_id = $news->id;
+        //     $newsSponsors->sponsor_id = $request->sponsor_id[$i];
+        //     $newsSponsors->save();
+        // }
 
         return response()->json([
             'data' => new NewsResource($news)
