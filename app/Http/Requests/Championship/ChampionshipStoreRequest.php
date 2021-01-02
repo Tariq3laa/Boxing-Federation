@@ -24,7 +24,7 @@ class ChampionshipStoreRequest extends FormRequest
             'date'                 => 'bail|required|string|max:1000',
             'title'                => 'bail|required|string|max:1000',
             'photo'                => 'bail|required|image',
-            'status'               => 'bail|required|string|max:1000',
+            // 'status'               => 'bail|required|string|max:1000',
             'age'                  => 'bail|required|string|max:1000',
             'location'             => 'bail|required|string|max:1000',
             'other_details'        => 'bail|nullable|string|max:1000',

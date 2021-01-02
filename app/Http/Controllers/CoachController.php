@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tec;
 use App\Models\Coach;
 use Illuminate\Http\Request;
+use App\Http\Resources\Tec\TecResource;
 use App\Http\Resources\Coach\CoachResource;
 use App\Http\Resources\Coach\CoachCollection;
 use App\Http\Requests\Coach\CoachStoreRequest;
@@ -79,5 +81,19 @@ class CoachController extends Controller
         // unlink(storage_path("app/$coach->avatar"));
         $coach->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function login(Request $request)
+    {
+        $coach = Coach::where('email', $request->email)->where('password', $request->password);
+        $tec = Tec::where('email', $request->email)->where('password', $request->password);
+
+        if($coach) {
+            return new CoachResource($coach);
+        } else if($tec) {
+            return new TecResource($tec);
+        } else {
+            return response()->json('not_found', Response::HTTP_ACCEPTED);
+        }
     }
 }

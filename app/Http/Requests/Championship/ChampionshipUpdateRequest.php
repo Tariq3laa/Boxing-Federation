@@ -24,7 +24,7 @@ class ChampionshipUpdateRequest extends FormRequest
             'date'                 => 'bail|nullable|string|max:1000',
             'title'                => 'bail|nullable|string|max:1000',
             'photo'                => 'bail|nullable|image',
-            'status'               => 'bail|nullable|string|max:1000',
+            // 'status'               => 'bail|nullable|string|max:1000',
             'age'                  => 'bail|nullable|string|max:1000',
             'location'             => 'bail|nullable|string|max:1000',
             'other_details'        => 'bail|nullable|string|max:1000',
