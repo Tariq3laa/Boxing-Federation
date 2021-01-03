@@ -67,8 +67,8 @@ class PlayerController extends Controller
 
     public function destroy(Player $player)
     {
-        // unlink(storage_path("app/$player->avatar"));
-        $player->delete();
+        unlink(storage_path("app/$player->avatar"));
+        $player->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

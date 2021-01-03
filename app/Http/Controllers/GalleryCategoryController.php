@@ -57,7 +57,7 @@ class GalleryCategoryController extends Controller
 
     public function destroy(GalleryCategory $category)
     {
-        $category->delete();
+        $category->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 

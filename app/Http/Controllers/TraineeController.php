@@ -72,7 +72,7 @@ class TraineeController extends Controller
 
     public function destroy(Trainee $trainee)
     {
-        $trainee->delete();
+        $trainee->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 

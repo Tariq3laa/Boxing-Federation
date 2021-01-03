@@ -64,8 +64,8 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
-        // unlink(storage_path("app/$gallery->photo"));
-        $gallery->delete();
+        unlink(storage_path("app/$gallery->photo"));
+        $gallery->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

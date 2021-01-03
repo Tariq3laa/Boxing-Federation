@@ -64,8 +64,8 @@ class OrganizerController extends Controller
 
     public function destroy(Organizer $organizer)
     {
-        // unlink(storage_path("app/$organizer->avatar"));
-        $organizer->delete();
+        unlink(storage_path("app/$organizer->avatar"));
+        $organizer->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -68,8 +68,8 @@ class RefereeController extends Controller
 
     public function destroy(Referee $referee)
     {
-        // unlink(storage_path("app/$referee->avatar"));
-        $referee->delete();
+        unlink(storage_path("app/$referee->avatar"));
+        $referee->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

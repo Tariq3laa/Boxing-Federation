@@ -64,8 +64,8 @@ class WriterController extends Controller
 
     public function destroy(Writer $writer)
     {
-        // unlink(storage_path("app/$writer->avatar"));
-        $writer->delete();
+        unlink(storage_path("app/$writer->avatar"));
+        $writer->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

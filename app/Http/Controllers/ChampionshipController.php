@@ -101,11 +101,11 @@ class ChampionshipController extends Controller
 
     public function destroy(Championship $championship)
     {
-        // unlink(storage_path("app/$championship->photo"));
-        // foreach ($championship->gallery as $item) {
-        //     unlink(storage_path("app/$item->photo"));
-        // }
-        $championship->delete();
+        unlink(storage_path("app/$championship->photo"));
+        foreach ($championship->gallery as $item) {
+            unlink(storage_path("app/$item->photo"));
+        }
+        $championship->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

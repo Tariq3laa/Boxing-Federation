@@ -65,7 +65,7 @@ class ContactUSController extends Controller
 
     public function destroy(ContactUS $contactU)
     {
-        $contactU->delete();
+        $contactU->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

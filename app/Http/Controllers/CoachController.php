@@ -78,8 +78,8 @@ class CoachController extends Controller
 
     public function destroy(Coach $coach)
     {
-        // unlink(storage_path("app/$coach->avatar"));
-        $coach->delete();
+        unlink(storage_path("app/$coach->avatar"));
+        $coach->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
@@ -89,9 +89,15 @@ class CoachController extends Controller
         $tec = Tec::where('email', $request->email)->where('password', $request->password);
 
         if($coach) {
-            return new CoachResource($coach);
+            return response()->json([
+                'type' => 'coach',
+                'data' => new CoachResource($coach)
+            ], Response::HTTP_ACCEPTED);
         } else if($tec) {
-            return new TecResource($tec);
+            return response()->json([
+                'type' => 'tec',
+                'data' => new TecResource($tec)
+            ], Response::HTTP_ACCEPTED);
         } else {
             return response()->json('not_found', Response::HTTP_ACCEPTED);
         }

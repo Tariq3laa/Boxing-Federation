@@ -64,8 +64,8 @@ class CarouselController extends Controller
 
     public function destroy(Carousel $carousel)
     {
-        // unlink(storage_path("app/$carousel->photo"));
-        $carousel->delete();
+        unlink(storage_path("app/$carousel->photo"));
+        $carousel->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

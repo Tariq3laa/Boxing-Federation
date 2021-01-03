@@ -64,8 +64,8 @@ class FounderController extends Controller
 
     public function destroy(Founder $founder)
     {
-        // unlink(stokrage_path("app/$founder->avatar"));
-        $founder->delete();
+        unlink(stokrage_path("app/$founder->avatar"));
+        $founder->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

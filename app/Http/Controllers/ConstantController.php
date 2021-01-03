@@ -59,7 +59,7 @@ class ConstantController extends Controller
 
     public function destroy(Constant $constant)
     {
-        $constant->delete();
+        $constant->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

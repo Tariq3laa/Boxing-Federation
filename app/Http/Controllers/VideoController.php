@@ -66,9 +66,9 @@ class VideoController extends Controller
 
     public function destroy(Video $video)
     {
-        // unlink(storage_path("app/$video->photo"));
-        // unlink(storage_path("app/$video->video"));
-        $video->delete();
+        unlink(storage_path("app/$video->photo"));
+        unlink(storage_path("app/$video->video"));
+        $video->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -86,8 +86,8 @@ class TrainingController extends Controller
 
     public function destroy(Training $course)
     {
-        // unlink(storage_path("app/$course->photo"));
-        $course->delete();
+        unlink(storage_path("app/$course->photo"));
+        $course->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 
