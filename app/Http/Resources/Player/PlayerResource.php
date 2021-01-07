@@ -13,6 +13,7 @@ class PlayerResource extends JsonResource
             'name' => $this->name,
             'club' => $this->club,
             'birth' => $this->birth,
+            'weight' => $this->weight,
             'avatar' => URL::to('/') . (str_replace('public', '/storage', $this->avatar)),
         ];
     }

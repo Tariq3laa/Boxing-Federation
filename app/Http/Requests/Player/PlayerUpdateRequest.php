@@ -16,8 +16,9 @@ class PlayerUpdateRequest extends FormRequest
         return [
             'name'                  => 'bail|nullable|string|max:1000',
             'club'                  => 'bail|nullable|string|max:1000',
-            'avatar'                => 'bail|nullable|image',
             'birth'                 => 'bail|nullable|date',
+            'weight'                => 'bail|nullable|numeric|min:1|not_in:0',
+            'avatar'                => 'bail|nullable|image',
         ];
     }
 }

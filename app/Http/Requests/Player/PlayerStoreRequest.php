@@ -16,8 +16,9 @@ class PlayerStoreRequest extends FormRequest
         return [
             'name'                  => 'bail|required|string|max:1000',
             'club'                  => 'bail|required|string|max:1000',
-            'avatar'                => 'bail|required|image',
             'birth'                 => 'bail|required|date',
+            'weight'                => 'bail|required|numeric|min:1|not_in:0',
+            'avatar'                => 'bail|required|image',
         ];
     }
 }

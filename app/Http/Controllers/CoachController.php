@@ -75,7 +75,7 @@ class CoachController extends Controller
         if($request->has('club'))
             $coach->club = $request->club;
         if($request->has('rating'))
-            $coach->club = $request->rating;
+            $coach->rating = $request->rating;
         if($request->has('avatar')) {
             unlink(storage_path("app/$coach->avatar"));
             $coach->avatar = $request->file('avatar')->store('public');

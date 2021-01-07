@@ -54,7 +54,7 @@ class RefereeController extends Controller
         if($request->has('club'))
             $referee->club = $request->club;
         if($request->has('rating'))
-            $referee->club = $request->rating;
+            $referee->rating = $request->rating;
         if($request->has('avatar')) {
             unlink(storage_path("app/$referee->avatar"));
             $referee->avatar = $request->file('avatar')->store('public');
