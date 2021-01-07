@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Tec;
 use Illuminate\Http\Request;
+use App\Mail\Tec\verification;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\Tec\TecResource;
 use App\Http\Resources\Tec\TecCollection;
 use App\Http\Requests\Tec\TecStoreRequest;
@@ -28,8 +31,16 @@ class TecController extends Controller
         $tec->name = $request->name;
         $tec->email = $request->email;
         $tec->password = $request->password;
+        $tec->verification_code = sha1(time());
         $tec->avatar = $request->file('avatar')->store('public');
         $tec->save();
+
+        $data = [
+            'name' => $tec->name,
+            'verification_code' => $tec->verification_code
+        ];
+
+        Mail::to($tec->email)->send(new verification($data));
 
         return response()->json([
             'data' => new TecResource($tec)
@@ -70,5 +81,18 @@ class TecController extends Controller
         unlink(storage_path("app/$tec->avatar"));
         $tec->forceDelete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function verify(Request $request)
+    {
+        $tec = Tec::where('verification_code', $request->code)->first();
+        if($tec) {
+            $tec->is_verified = 1;
+            $tec->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
+            $tec->save();
+            return redirect('');
+        } else {
+            abort(404);
+        }
     }
 }

@@ -13,6 +13,7 @@ class CoachResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
+            'verified' => $this->is_verified == 1 ? 'yes' : 'no',
             // 'bio' => $this->bio,
             'club' => $this->club,
             'rating' => $this->rating,

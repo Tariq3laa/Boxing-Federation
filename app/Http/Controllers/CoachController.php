@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Tec;
 use App\Models\Coach;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Mail\Coach\verification;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\Tec\TecResource;
 use App\Http\Resources\Coach\CoachResource;
 use App\Http\Resources\Coach\CoachCollection;
@@ -30,11 +33,19 @@ class CoachController extends Controller
         $coach->name = $request->name;
         $coach->email = $request->email;
         $coach->password = $request->password;
+        $coach->verification_code = sha1(time());
         // $coach->bio = $request->bio;
         $coach->club = $request->club;
         $coach->rating = $request->rating;
         $coach->avatar = $request->file('avatar')->store('public');
         $coach->save();
+
+        $data = [
+            'name' => $coach->name,
+            'verification_code' => $coach->verification_code
+        ];
+
+        Mail::to($coach->email)->send(new verification($data));
 
         return response()->json([
             'data' => new CoachResource($coach)
@@ -89,17 +100,38 @@ class CoachController extends Controller
         $tec = Tec::where('email', $request->email)->where('password', $request->password);
 
         if($coach) {
-            return response()->json([
-                'type' => 'coach',
-                'data' => new CoachResource($coach)
-            ], Response::HTTP_ACCEPTED);
+            if($coach->is_verified == 1) {
+                return response()->json([
+                    'type' => 'coach',
+                    'data' => new CoachResource($coach)
+                ], Response::HTTP_ACCEPTED);
+            } else {
+                return response()->json('not_verified', Response::HTTP_ACCEPTED);
+            }
         } else if($tec) {
-            return response()->json([
-                'type' => 'tec',
-                'data' => new TecResource($tec)
-            ], Response::HTTP_ACCEPTED);
+            if($tec->is_verified == 1) {
+                return response()->json([
+                    'type' => 'tec',
+                    'data' => new TecResource($tec)
+                ], Response::HTTP_ACCEPTED);
+            } else {
+                return response()->json('not_verified', Response::HTTP_ACCEPTED);
+            }
         } else {
             return response()->json('not_found', Response::HTTP_ACCEPTED);
+        }
+    }
+
+    public function verify(Request $request)
+    {
+        $coach = Coach::where('verification_code', $request->code)->first();
+        if($coach) {
+            $coach->is_verified = 1;
+            $coach->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
+            $coach->save();
+            return redirect('');
+        } else {
+            abort(404);
         }
     }
 }

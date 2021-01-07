@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapCarouselRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/carousel/carousel.php'));
     }
@@ -68,7 +68,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapPlayerRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/player/player.php'));
     }
@@ -76,7 +76,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapCoachRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/coach/coach.php'));
     }
@@ -84,7 +84,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapTecRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/tec/tec.php'));
     }
@@ -92,7 +92,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapRefereeRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/referee/referee.php'));
     }
@@ -100,7 +100,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapFounderRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/founder/founder.php'));
     }
@@ -108,7 +108,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWriterRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/writer/writer.php'));
     }
@@ -116,7 +116,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapSponsorRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/sponsor/sponsor.php'));
     }
@@ -124,7 +124,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapNewsRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/news/news.php'));
     }
@@ -132,7 +132,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapOrganizerRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/organizer/organizer.php'));
     }
@@ -140,7 +140,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapChampionshipRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/championship/championship.php'));
     }
@@ -148,7 +148,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapTrainingCategoryRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/training/category.php'));
     }
@@ -156,7 +156,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapTrainingCourseRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/training/course.php'));
     }
@@ -164,7 +164,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapTrainingTraineeRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/training/trainee.php'));
     }
@@ -172,7 +172,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapContactUSRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/contactUS/contactUS.php'));
     }
@@ -180,7 +180,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapConstantRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/constant/constant.php'));
     }
@@ -188,7 +188,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapGalleryCategoryRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/gallery/category.php'));
     }
@@ -196,7 +196,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapGalleryRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/gallery/gallery.php'));
     }
@@ -204,7 +204,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapVideoRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware('auth:api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api/video/video.php'));
     }
