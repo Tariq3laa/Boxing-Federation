@@ -129,7 +129,7 @@ class CoachController extends Controller
             $coach->is_verified = 1;
             $coach->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
             $coach->save();
-            return redirect('');
+            // return redirect('');
         } else {
             abort(404);
         }

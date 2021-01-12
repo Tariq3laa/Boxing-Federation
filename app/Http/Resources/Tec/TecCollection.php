@@ -3,9 +3,9 @@
 namespace App\Http\Resources\Tec;
 
 use Illuminate\Support\Facades\URL;
-use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class TecCollection extends ResourceCollection
+class TecCollection extends JsonResource
 {
     public function toArray($request)
     {

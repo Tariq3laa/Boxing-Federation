@@ -90,7 +90,7 @@ class TecController extends Controller
             $tec->is_verified = 1;
             $tec->email_verified_at = Carbon::now()->format('Y-m-d H:i:s');
             $tec->save();
-            return redirect('');
+            // return redirect('');
         } else {
             abort(404);
         }
